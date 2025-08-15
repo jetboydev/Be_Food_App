@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Roles {
+  id          Int       @id @default(autoincrement())
+  name        String?   @db.VarChar(255)
+  description String?   @db.VarChar(255)
+  isActive    Boolean?  @default(true)
+  deletedBy   Int       @default(0)
+  isDeleted   Boolean   @default(false)
+  deletedAt   DateTime? @db.Timestamp(0)
+  createdAt   DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime  @default(now()) @db.Timestamp(0)
+}
+
+model Users {
+  id       Int       @id @default(autoincrement())
+  fullName String?   @db.VarChar(255)
+  Likes    Likes[]
+  Orders   Orders[]
+  Reviews  Reviews[]
+}
+
+model Likes {
+  id           Int          @id @default(autoincrement())
+  userId       Int?
+  restaurantId Int?
+  Users        Users?       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Likes_ibfk_1")
+  Restaurants  Restaurants? @relation(fields: [restaurantId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Likes_ibfk_2")
+
+  @@index([restaurantId], map: "restaurantId")
+  @@index([userId], map: "userId")
+  @@unique([userId, restaurantId], name: "userId_restaurantId")
+}
+
+model Orders {
+  id           Int          @id @default(autoincrement())
+  userId       Int?
+  restaurantId Int?
+  foodId       Int?
+  Users        Users?       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Orders_ibfk_1")
+  Restaurants  Restaurants? @relation(fields: [restaurantId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Orders_ibfk_2")
+  Foods        Foods?       @relation(fields: [foodId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Orders_ibfk_3")
+
+  @@index([restaurantId], map: "restaurantId")
+  @@index([userId], map: "userId")
+  @@index([foodId], map: "foodId")
+}
+
+model Restaurants {
+  id      Int       @id @default(autoincrement())
+  name    String?   @db.VarChar(255)
+  Likes   Likes[]
+  Orders  Orders[]
+  Reviews Reviews[]
+}
+
+model Reviews {
+  id           Int          @id @default(autoincrement())
+  userId       Int?
+  restaurantId Int?
+  content      String?      @db.Text
+  Users        Users?       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Reviews_ibfk_1")
+  Restaurants  Restaurants? @relation(fields: [restaurantId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Reviews_ibfk_2")
+
+  @@index([restaurantId], map: "restaurantId")
+  @@index([userId], map: "userId")
+}
+
+model Foods {
+  id     Int      @id @default(autoincrement())
+  name   String   @db.VarChar(255)
+  Orders Orders[]
+}
