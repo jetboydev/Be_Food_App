@@ -13,6 +13,10 @@
 | GET    | `/likes/restaurant` | Lấy danh sách lượt like theo nhà hàng |             | `restaurantId=5`                 |
 | GET    | `/likes/user`       | Lấy danh sách nhà hàng user đã like   |             | `userId=1`                       |
 
+## Giao diện API Likes
+
+![API UI](./image/ReadMe/imageLike.png)
+
 ---
 
 ### 🔹 Reviews
@@ -22,6 +26,10 @@
 | POST   | `/reviews`             | Thêm đánh giá             | `{ "userId": 1, "restaurantId": 5, "content": "Ngon!" }` |                  |
 | GET    | `/reviews/users`       | Lấy đánh giá của user     |                                                          | `userId=1`       |
 | GET    | `/reviews/restaurants` | Lấy đánh giá của nhà hàng |                                                          | `restaurantId=5` |
+
+## Giao diện API Reviews
+
+![API UI](./image/ReadMe/imageReview.png)
 
 ---
 
@@ -33,6 +41,10 @@
 | GET    | `/orders/user`       | Lấy đơn hàng của user     |             | `userId=1`                                       |
 | GET    | `/orders/restaurant` | Lấy đơn hàng của nhà hàng |             | `restaurantId=5`                                 |
 
+## Giao diện API Orders
+
+![API UI](./image/ReadMe/imageOrder.png)
+
 ---
 
 ### 🔹 Others
@@ -42,6 +54,10 @@
 | GET    | `/users`       | Lấy danh sách người dùng |
 | GET    | `/restaurants` | Lấy danh sách nhà hàng   |
 | GET    | `/foods`       | Lấy danh sách món ăn     |
+
+## Giao diện API All
+
+![API UI](./image/ReadMe/image.png)
 
 ---
 
