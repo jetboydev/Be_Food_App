@@ -50,7 +50,7 @@
 ### 1. Clone dự án
 
 ```bash
-git clone https://github.com/username/Be_Food_App.git
+git clone https://github.com/jetboydev/Be_Food_App.git
 cd Be_Food_App
 ```
 
